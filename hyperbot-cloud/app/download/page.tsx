@@ -12,56 +12,94 @@ export default function Download() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a', color: '#fff', fontFamily: 'system-ui', padding: '40px' }}>
-      <a href="/" style={{ color: '#888', textDecoration: 'none' }}>← Back</a>
-      
-      <h1 style={{ fontSize: '3rem', marginTop: '40px', marginBottom: '20px' }}>
-        Install HyperBot
-      </h1>
-      <p style={{ color: '#888', fontSize: '1.2rem', marginBottom: '40px' }}>
-        One command to connect your machine to HyperBot
-      </p>
+    <div style={{ minHeight: '100vh', background: '#0a0a0a', color: '#fff', fontFamily: 'system-ui' }}>
+      {/* Header */}
+      <div style={{ padding: '20px 40px', borderBottom: '1px solid #111' }}>
+        <a href="/" style={{ color: '#888', textDecoration: 'none' }}>← Back to Home</a>
+      </div>
 
-      <div style={{ background: '#111', borderRadius: '16px', padding: '30px', marginBottom: '30px' }}>
-        <h3 style={{ marginBottom: '20px', color: '#00d4ff' }}>macOS / Linux</h3>
-        <div style={{ background: '#000', padding: '20px', borderRadius: '12px', fontFamily: 'monospace', fontSize: '1.1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>curl -sL https://myhyperbot.com/hyperbot.sh | bash</span>
-          <button onClick={() => copyToClipboard('curl -sL https://myhyperbot.com/hyperbot.sh | bash', 'mac')} style={{ padding: '8px 16px', background: '#222', border: 'none', borderRadius: '6px', color: '#fff', cursor: 'pointer' }}>
-            {copied === 'mac' ? '✓ Copied!' : 'Copy'}
-          </button>
+      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px' }}>
+        <h1 style={{ fontSize: '3rem', fontWeight: '800', marginBottom: '10px' }}>
+          Install <span style={{ color: '#00d4ff' }}>HyperBot</span>
+        </h1>
+        <p style={{ color: '#888', fontSize: '1.3rem', marginBottom: '40px' }}>
+          Connect your computer to HyperBot in seconds
+        </p>
+
+        {/* Install Box */}
+        <div style={{ background: '#111', borderRadius: '20px', padding: '40px', marginBottom: '40px', border: '1px solid #222' }}>
+          <h2 style={{ fontSize: '1.5rem', marginBottom: '20px' }}>🚀 Quick Install</h2>
+          
+          <div style={{ marginBottom: '30px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+              <span style={{ color: '#00d4ff', fontWeight: '600' }}>macOS / Linux</span>
+              <span style={{ color: '#666', fontSize: '0.9rem' }}>Run in Terminal</span>
+            </div>
+            <div style={{ background: '#000', padding: '16px 20px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <code style={{ color: '#00ff88', fontSize: '1rem' }}>curl -sL https://myhyperbot.com/hyperbot.sh | bash</code>
+              <button onClick={() => copyToClipboard('curl -sL https://myhyperbot.com/hyperbot.sh | bash', 'mac')} style={{ padding: '8px 16px', background: '#222', border: 'none', borderRadius: '8px', color: '#fff', cursor: 'pointer', marginLeft: '20px' }}>
+                {copied === 'mac' ? '✓ Copied' : 'Copy'}
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+              <span style={{ color: '#00d4ff', fontWeight: '600' }}>Windows</span>
+              <span style={{ color: '#666', fontSize: '0.9rem' }}>Run in PowerShell</span>
+            </div>
+            <div style={{ background: '#000', padding: '16px 20px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <code style={{ color: '#00ff88', fontSize: '1rem' }}>irm https://myhyperbot.com/hyperbot.ps1 | iex</code>
+              <button onClick={() => copyToClipboard('irm https://myhyperbot.com/hyperbot.ps1 | iex', 'win')} style={{ padding: '8px 16px', background: '#222', border: 'none', borderRadius: '8px', color: '#fff', cursor: 'pointer', marginLeft: '20px' }}>
+                {copied === 'win' ? '✓ Copied' : 'Copy'}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div style={{ background: '#111', borderRadius: '16px', padding: '30px', marginBottom: '30px' }}>
-        <h3 style={{ marginBottom: '20px', color: '#00d4ff' }}>Windows (PowerShell)</h3>
-        <div style={{ background: '#000', padding: '20px', borderRadius: '12px', fontFamily: 'monospace', fontSize: '1.1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>irm https://myhyperbot.com/hyperbot.ps1 | iex</span>
-          <button onClick={() => copyToClipboard('irm https://myhyperbot.com/hyperbot.ps1 | iex', 'win')} style={{ padding: '8px 16px', background: '#222', border: 'none', borderRadius: '6px', color: '#fff', cursor: 'pointer' }}>
-            {copied === 'win' ? '✓ Copied!' : 'Copy'}
-          </button>
+        {/* Steps */}
+        <div style={{ background: '#111', borderRadius: '20px', padding: '40px', border: '1px solid #222' }}>
+          <h2 style={{ fontSize: '1.5rem', marginBottom: '30px' }}>📋 After Install</h2>
+          
+          <div style={{ display: 'grid', gap: '20px' }}>
+            <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+              <div style={{ width: '30px', height: '30px', background: '#00d4ff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000', fontWeight: '700', flexShrink: '0' }}>1</div>
+              <div>
+                <div style={{ fontWeight: '600', marginBottom: '5px' }}>Edit config file</div>
+                <code style={{ color: '#00d4ff', background: '#000', padding: '4px 10px', borderRadius: '6px', fontSize: '0.9rem' }}>nano ~/.hyperbot/config.json</code>
+              </div>
+            </div>
+            
+            <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+              <div style={{ width: '30px', height: '30px', background: '#00d4ff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000', fontWeight: '700', flexShrink: '0' }}>2</div>
+              <div>
+                <div style={{ fontWeight: '600', marginBottom: '5px' }}>Set your server URL</div>
+                <code style={{ color: '#00d4ff', background: '#000', padding: '4px 10px', borderRadius: '6px', fontSize: '0.9rem' }}>"cloudUrl": "https://myhyperbot.com"</code>
+              </div>
+            </div>
+            
+            <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+              <div style={{ width: '30px', height: '30px', background: '#00d4ff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000', fontWeight: '700', flexShrink: '0' }}>3</div>
+              <div>
+                <div style={{ fontWeight: '600', marginBottom: '5px' }}>Start the agent</div>
+                <code style={{ color: '#00d4ff', background: '#000', padding: '4px 10px', borderRadius: '6px', fontSize: '0.9rem' }}>~/.hyperbot/start.sh</code>
+              </div>
+            </div>
+            
+            <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+              <div style={{ width: '30px', height: '30px', background: '#00d4ff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000', fontWeight: '700', flexShrink: '0' }}>4</div>
+              <div>
+                <div style={{ fontWeight: '600', marginBottom: '5px' }}>Go to dashboard!</div>
+                <a href="/dashboard" style={{ color: '#00d4ff' }}>https://myhyperbot.com/dashboard</a>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div style={{ marginTop: '50px' }}>
-        <h2 style={{ marginBottom: '30px' }}>After install:</h2>
-        <ol style={{ color: '#888', lineHeight: '2.5', fontSize: '1.1rem' }}>
-          <li>Edit <code style={{ color: '#00d4ff' }}>~/.hyperbot/config.json</code></li>
-          <li>Set cloudUrl: <code style={{ color: '#00d4ff' }}>"cloudUrl": "https://myhyperbot.com"</code></li>
-          <li>Set your API key (get from dashboard or leave blank)</li>
-          <li>Run: <code style={{ color: '#00d4ff' }}>~/.hyperbot/start.sh</code></li>
-          <li>Your machine appears in the dashboard!</li>
-        </ol>
-      </div>
-
-      <div style={{ marginTop: '40px', background: '#111', borderRadius: '16px', padding: '30px' }}>
-        <h3 style={{ marginBottom: '20px', color: '#00d4ff' }}>Example config.json:</h3>
-        <pre style={{ background: '#000', padding: '20px', borderRadius: '12px', overflow: 'auto', fontSize: '0.9rem', color: '#888' }}>
-{`{
-  "cloudUrl": "https://myhyperbot.com",
-  "deviceName": "my-macbook",
-  "apiKey": ""
-}`}
-        </pre>
+        {/* Help */}
+        <div style={{ marginTop: '40px', textAlign: 'center', color: '#666' }}>
+          <p>Need help? <a href="https://github.com/conceptlucid/myhyperbot" style={{ color: '#00d4ff' }}>Check GitHub</a></p>
+        </div>
       </div>
     </div>
   )
