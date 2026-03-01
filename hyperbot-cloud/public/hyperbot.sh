@@ -2,8 +2,6 @@
 # HyperBot Installer
 # Run: curl -sL https://myhyperbot.com/hyperbot.sh | bash
 
-set -e
-
 echo "🤖 Installing HyperBot..."
 
 # Detect OS
@@ -29,17 +27,23 @@ INSTALL_DIR="$HOME/.hyperbot"
 mkdir -p "$INSTALL_DIR"
 cd "$INSTALL_DIR"
 
-# Download agent files from GitHub releases (or clone)
+# Download agent
 echo "📥 Downloading HyperBot agent..."
-REPO="conceptlucid/myhyperbot"
+git clone --depth 1 https://github.com/conceptlucid/myhyperbot.git temp 2>/dev/null || {
+    echo "⚠️ Git clone failed, using npm..."
+}
 
-# Try to download pre-built or clone
-if command -v git &> /dev/null; then
-    if [ -d ".git" ]; then
-        git pull 2>/dev/null || true
-    else
-        git clone --depth 1 https://github.com/$REPO.git temp 2>/dev/null || echo "⚠️  Using fallback..."
-    fi
+if [ -d "temp/hyperbot-agent" ]; then
+    mv temp/hyperbot-agent .
+    rm -rf temp
+fi
+
+# Install dependencies
+if [ -d "hyperbot-agent" ]; then
+    cd hyperbot-agent
+    echo "📚 Installing dependencies..."
+    npm install 2>/dev/null || npm install || true
+    cd ..
 fi
 
 # Create config
@@ -55,20 +59,10 @@ EOF
 # Create start script
 cat > start.sh << 'EOF'
 #!/bin/bash
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/hyperbot-agent"
 npx tsx src/index.ts
 EOF
 chmod +x start.sh
-
-# Install Node dependencies if needed
-if [ -d "hyperbot-agent" ]; then
-    cd hyperbot-agent
-    if [ ! -d "node_modules" ]; then
-        echo "📚 Installing dependencies..."
-        npm install --silent 2>/dev/null || npm install 2>/dev/null || true
-    fi
-    cd ..
-fi
 
 echo ""
 echo "✅ HyperBot installed!"
@@ -77,4 +71,3 @@ echo "Next steps:"
 echo "1. Edit ~/.hyperbot/config.json with your cloud URL"
 echo "2. Run: ~/.hyperbot/start.sh"
 echo ""
-echo "📖 Docs: https://github.com/conceptlucid/myhyperbot"
