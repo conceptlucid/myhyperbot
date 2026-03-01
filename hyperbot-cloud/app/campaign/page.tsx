@@ -37,8 +37,8 @@ export default function Campaign() {
           <svg width="100" height="100" viewBox="0 0 400 400">
             <defs>
               <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#0066ff;stop-opacity:1" />
+                <stop offset="0%" style={{stopColor: "#00d4ff", stopOpacity: 1}} />
+                <stop offset="100%" style={{stopColor: "#0066ff", stopOpacity: 1}} />
               </linearGradient>
             </defs>
             <circle cx="200" cy="200" r="180" fill="url(#grad)"/>
